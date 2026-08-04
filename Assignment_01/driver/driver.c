@@ -9,6 +9,7 @@ int main()
     FILE *fp;
     int M, K, N;
     int i, j;
+    int blockSize = 2;
 
     fp = fopen("Assignment_01/tests/gemm_test_01.txt", "r");
 
@@ -57,13 +58,35 @@ int main()
     // ---------- Stop Timer ----------
 
     double timeTaken = ((double)(end - start)) / CLOCKS_PER_SEC * 1000;
-
-    printf("\nAlgorithm : GEMM Simple\n\n");
+     printf("\n=====================================\n");
+    printf("      Simple GEMM\n");
+    printf("=====================================\n");
 
     printf("Result Matrix:\n");
     printMatrix(C, M, N);
 
     printf("\nExecution Time : %.6f ms\n", timeTaken);
+
+     
+    // BLOCKING GEMM
+
+
+    start = clock();
+
+    blockingGEMM(A, B, C, M, K, N, blockSize);
+
+    end = clock();
+
+    double blockTime =
+        ((double)(end - start) * 1000) / CLOCKS_PER_SEC;
+
+    printf("\n=====================================\n");
+    printf("      BLOCKING GEMM\n");
+    printf("=====================================\n");
+
+    printMatrix(C, M, N);
+
+    printf("\nExecution Time : %.6f ms\n", blockTime);
 
     // Free Memory
     for (i = 0; i < M; i++)

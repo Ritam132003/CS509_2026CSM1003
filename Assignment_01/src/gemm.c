@@ -41,9 +41,46 @@ void simpleGEMM(int **A, int **B, int **C, int M, int K, int N)
         }
     }
 }
-
 // Blocking GEMM
-void blockingGEMM(int **A, int **B, int **C, int M, int K, int N, int blockSize)
+void blockingGEMM(int **A, int **B, int **C,
+                  int M, int K, int N,
+                  int blockSize)
 {
-    // Placeholder for now
+    int i, j, k;
+    int ii, jj, kk;
+
+    // Initialize result matrix
+    for (i = 0; i < M; i++)
+    {
+        for (j = 0; j < N; j++)
+        {
+            C[i][j] = 0;
+        }
+    }
+
+    // Blocked Matrix Multiplication
+    for (ii = 0; ii < M; ii += blockSize)
+    {
+        for (jj = 0; jj < N; jj += blockSize)
+        {
+            for (kk = 0; kk < K; kk += blockSize)
+            {
+
+                int iMax = (ii + blockSize < M) ? ii + blockSize : M;
+                int jMax = (jj + blockSize < N) ? jj + blockSize : N;
+                int kMax = (kk + blockSize < K) ? kk + blockSize : K;
+
+                for (i = ii; i < iMax; i++)
+                {
+                    for (j = jj; j < jMax; j++)
+                    {
+                        for (k = kk; k < kMax; k++)
+                        {
+                            C[i][j] += A[i][k] * B[k][j];
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

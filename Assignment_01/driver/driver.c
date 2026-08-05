@@ -10,14 +10,15 @@ int main()
     int M, K, N;
     int i, j;
     int blockSize = 2;
-
-    fp = fopen("Assignment_01/tests/gemm_test_01.txt", "r");
-
+    char filename[100];
+    printf("Enter input file path: ");
+    scanf("%99s", filename);
+    fp = fopen(filename, "r");
     if (fp == NULL)
-    {
+      {
         printf("Error: Cannot open input file.\n");
         return 1;
-    }
+      }
 
     // Read matrix dimensions
     fscanf(fp, "%d %d %d", &M, &K, &N);
@@ -69,7 +70,6 @@ int main()
 
      
     // BLOCKING GEMM
-
 
     start = clock();
 

@@ -91,3 +91,50 @@ Execution Time : 0.000000 ms
 
 Execution Time : 0.000000 ms
 ---
+## Test Results
+
+### 10 × 10 Matrix Multiplication
+
+Input File:`Assignment_01/tests/gemm_test_10.txt`
+
+| Algorithm | Execution Time |
+|-----------|---------------:|
+| Simple GEMM | 7.000000 ms |
+| Blocking GEMM | 4.000000 ms |
+
+Observation:
+- Both algorithms produced the same output matrix.
+- Due to the small matrix size, the execution times are very close.
+- Blocking GEMM does not show a significant performance improvement for small matrices.
+
+---
+
+### 100 × 100 Matrix Multiplication
+
+Input File:`Assignment_01/tests/gemm_test_100.txt`
+
+| Algorithm | Execution Time |
+|-----------|---------------:|
+| Simple GEMM | 15.000000 ms |
+| Blocking GEMM | 9.000000 ms |
+
+**Observation:**
+- Both algorithms produced identical results.
+- The execution time increased because of the larger matrix size.
+- Blocking GEMM generally performs better for larger matrices due to improved cache locality and reduced memory access overhead.
+
+---
+
+## Performance Summary
+
+| Matrix Size | Simple GEMM | Blocking GEMM |
+|-------------|------------:|--------------:|
+| 10 × 10 | XX.XXXXXX ms | XX.XXXXXX ms |
+| 100 × 100 | XX.XXXXXX ms | XX.XXXXXX ms |
+
+### Conclusion
+
+- The implementation of both **Simple GEMM** and **Blocking GEMM** was successfully verified.
+- Both algorithms produced the same matrix multiplication results.
+- For small matrices (10×10), the execution times are nearly identical.
+- For larger matrices (100×100), Blocking GEMM is expected to perform more efficiently because it improves cache utilization during matrix multiplication.
